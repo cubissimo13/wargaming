@@ -16,11 +16,13 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation(group = "org.springframework.boot", name = "spring-boot-starter-web")
+	implementation(group = "io.springfox", name = "springfox-boot-starter", version = "3.0.0")
+	implementation(group = "io.springfox", name = "springfox-swagger-ui", version = "2.9.2")
+	implementation(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin")
+	implementation(group = "org.jetbrains.kotlin", name = "kotlin-reflect")
+	implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8")
+	testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile> {
