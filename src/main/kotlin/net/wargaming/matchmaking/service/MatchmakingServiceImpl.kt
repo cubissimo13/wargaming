@@ -24,17 +24,20 @@ class MatchmakingServiceImpl(
     private val lock = ReentrantLock()
 
     override fun addUserInQueue(user: User) {
-        lock.tryLock()
-        val userSkill = user.skill.roundToInt().toString()
-        val userLatency = user.latency.roundToInt().toString()
-        groupMatrix.putIfAbsent(userSkill, mutableMapOf())
-        groupMatrix[userSkill]?.putIfAbsent(userLatency, mutableListOf())
-        groupMatrix[userSkill]?.get(userLatency)?.add(user)
-        if (groupMatrix[userSkill]?.get(userLatency)?.size == matchmakingProperty.groupCapacity) {
-            makeGroup(groupNumber.getAndIncrement().toString(), ArrayList(groupMatrix[userSkill]?.get(userLatency)))
-            groupMatrix[userSkill]?.set(userLatency, mutableListOf())
+        lock.lock()
+        try {
+            val userSkill = user.skill.roundToInt().toString()
+            val userLatency = user.latency.roundToInt().toString()
+            groupMatrix.putIfAbsent(userSkill, mutableMapOf())
+            groupMatrix[userSkill]?.putIfAbsent(userLatency, mutableListOf())
+            groupMatrix[userSkill]?.get(userLatency)?.add(user)
+            if (groupMatrix[userSkill]?.get(userLatency)?.size == matchmakingProperty.groupCapacity) {
+                makeGroup(groupNumber.getAndIncrement().toString(), ArrayList(groupMatrix[userSkill]?.get(userLatency)))
+                groupMatrix[userSkill]?.set(userLatency, mutableListOf())
+            }
+        } finally {
+            lock.unlock()
         }
-        lock.unlock()
     }
 
     private fun makeGroup(name: String, members: List<User>) {
