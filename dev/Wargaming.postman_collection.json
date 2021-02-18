@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "4d1e82e9-c2a6-4a87-b2c3-be56fa5b4d34",
+		"name": "Wargaming",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"user\",\r\n    \"skill\" : \"1.0\",\r\n    \"latency\" : \"1.0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/matchmaking/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"matchmaking",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Run simulation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/mock/simulation/run",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"mock",
+						"simulation",
+						"run"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop simulation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/mock/simulation/stop",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"mock",
+						"simulation",
+						"stop"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

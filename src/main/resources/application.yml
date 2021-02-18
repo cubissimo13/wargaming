@@ -1,1 +1,8 @@
+spring:
+  application:
+    name: wargaming-test-matchmaking
+  jackson:
+    default-property-inclusion: non_null
 
+matchmaking:
+  group-capacity: 5 #Размер группы

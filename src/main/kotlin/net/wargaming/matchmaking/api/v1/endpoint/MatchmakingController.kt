@@ -1,6 +1,6 @@
 package net.wargaming.matchmaking.api.v1.endpoint
 
-import io.swagger.v3.oas.annotations.Operation
+import io.swagger.annotations.ApiOperation
 import net.wargaming.matchmaking.api.v1.dto.UserDto
 import net.wargaming.matchmaking.converter.Converter
 import net.wargaming.matchmaking.entity.User
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 /**
- * REST-контроллер для для поиска группы
+ * REST-контроллер для поиска группы
  */
 @RestController
 @RequestMapping("/v1/matchmaking", produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -20,7 +20,7 @@ class MatchmakingController(private val userConverter: Converter<UserDto, User>,
                             private val matchmakingService: MatchmakingService) {
 
     @PostMapping("/users")
-    @Operation(summary = "Добавление пользователя в очередь")
+    @ApiOperation(value = "Добавление пользователя в очередь")
     fun getMobileNumberInfo(@RequestBody userDto: UserDto) {
         matchmakingService.addUserInQueue(userConverter.convert(userDto))
     }
